@@ -2,6 +2,12 @@
 
 <ul>
 <% @category.items.each do |item| %>
-    <li><%= link_to item.title, item_path(item) %></li>
+    <li>
+        <%= link_to item.title, item_path(item) %> - $<%= item.price/100 %>
+        <%= form_for @line_item do |f| %>
+            <% f.hidden_field :item_id, value: item.id %>
+            <% f.submit "Add to Cart" %>
+        <% end %>
+    </li>
 <% end %>
 </ul>
